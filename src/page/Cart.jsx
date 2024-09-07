@@ -6,7 +6,10 @@ import { Link } from 'react-router-dom';
 function Cart() {
   const dispatch = useDispatch()
 
-  const { cartItem, price } = useSelector((state) => state.cart)
+  const { cartItem } = useSelector((state) => state.cart)
+  const { totalPrice, totalQuantity } = useSelector((state) => state.cart)
+  console.log(totalPrice, totalQuantity);
+  
   console.log(cartItem);
 
   const handleRemove=(e)=>{
@@ -26,6 +29,7 @@ function Cart() {
   return (
     <div >
       <h1>Cart page</h1>
+      <h1>total price: {}</h1>
 
       <body className="bg-gray-100">
         <div className="container mx-auto mt-10">
@@ -47,7 +51,7 @@ function Cart() {
                     <div className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
                       <div className="flex w-2/5">
                         <div className="w-20">
-                          <img className="h-24" src="https://drive.google.com/uc?id=18KkAVkGFvaGNqPy2DIvTqmUH_nk39o3z" alt="" />
+                          <img className="h-24" src={item.images} alt="" />
                         </div>
                         <div className="flex flex-col justify-between ml-4 flex-grow">
                           <span className="font-bold text-sm">{item.title}</span>
@@ -79,11 +83,11 @@ function Cart() {
               </Link>
             </div>
 
-            {/* <div id="summary" className="w-1/4 px-8 py-10">
+             <div id="summary" className="w-1/4 px-8 py-10">
               <h1 className="font-semibold text-2xl border-b pb-8">Order Summary</h1>
               <div className="flex justify-between mt-10 mb-5">
-                <span className="font-semibold text-sm uppercase">Items 3</span>
-                <span className="font-semibold text-sm">590$</span>
+                <span className="font-semibold text-sm uppercase">Items {totalQuantity}</span>
+                <span className="font-semibold text-sm">{Math.round((totalPrice).toFixed(2))}$</span>
               </div>
               <div>
                 <label className="font-medium inline-block mb-3 text-sm uppercase">Shipping</label>
@@ -99,11 +103,11 @@ function Cart() {
               <div className="border-t mt-8">
                 <div className="flex font-semibold justify-between py-6 text-sm uppercase">
                   <span>Total cost</span>
-                  <span>$600</span>
+                  <span>{Math.round((totalPrice-10).toFixed(2))}$</span>
                 </div>
                 <button className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">Checkout</button>
               </div>
-            </div> */}
+            </div> 
 
           </div>
         </div>
